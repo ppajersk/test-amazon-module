@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  gather_facts: no
+  ignore_unreachable: yes
+  tasks:
+  - name: Reset AWS Password
+    amazon.aws.iam_user:
+      name: "{{ colab_username }}"
+      state: present
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      password: "{{ colab_user_password_final }}"
+      update_password: always
+    register: iam_user_reset
+    ignore_errors: true
+    when: check_iam_result.failed == false and check_iam_result.user_present == true
+ 
