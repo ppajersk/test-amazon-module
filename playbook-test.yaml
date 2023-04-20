@@ -13,5 +13,5 @@
       update_password: always
     register: iam_user_reset
     ignore_errors: true
-    when: check_iam_result.failed == false and check_iam_result.user_present == true
+    
  
